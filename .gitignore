@@ -1,0 +1,10 @@
+node_modules/
+dist/
+release/
+engines-input/
+bin/
+node/
+*.exe
+*.log
+.DS_Store
+Thumbs.db

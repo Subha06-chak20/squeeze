@@ -1,0 +1,24 @@
+{
+  "_readme": "Copy to engines.json and pin the exact files you ship. Put the files under engines-input/ using the paths below. The build refuses to continue on a SHA-256 mismatch.",
+  "node": {
+    "file": "node/node.exe",
+    "version": "22.14.0",
+    "url": "https://nodejs.org/en/download/",
+    "license": "MIT",
+    "sha256": "REPLACE_WITH_SHA256_OF_node.exe"
+  },
+  "ffmpeg": {
+    "file": "bin/ffmpeg.exe",
+    "version": "8.1.2",
+    "url": "https://www.gyan.dev/ffmpeg/builds/",
+    "license": "GPL-3.0-or-later",
+    "sha256": "REPLACE_WITH_SHA256_OF_ffmpeg.exe"
+  },
+  "ffprobe": {
+    "file": "bin/ffprobe.exe",
+    "version": "8.1.2",
+    "url": "https://www.gyan.dev/ffmpeg/builds/",
+    "license": "GPL-3.0-or-later",
+    "sha256": "REPLACE_WITH_SHA256_OF_ffprobe.exe"
+  }
+}

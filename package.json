@@ -1,0 +1,14 @@
+{
+  "name": "squeezeit",
+  "version": "1.1.0",
+  "private": true,
+  "description": "SqueezeIt - free, open-source, fully offline Windows file size reducer. No runtime npm packages.",
+  "license": "GPL-3.0-or-later",
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "build": "node build/stage.mjs",
+    "verify": "node build/verify.mjs",
+    "smoke": "node build/smoke.mjs"
+  }
+}

@@ -1,0 +1,52 @@
+SQUEEZEIT - START HERE
+======================
+
+SqueezeIt makes your videos and pictures smaller. It is free, it is private,
+and it works without the internet. Nothing is installed on your computer.
+
+
+HOW TO START
+------------
+Double-click the icon called "SqueezeIt" on your Desktop.
+
+If you do not see the icon, open the SqueezeIt folder and double-click
+"Start SqueezeIt.vbs". Your web browser will open with SqueezeIt ready.
+
+Keep the whole SqueezeIt folder together. Do not move "Start SqueezeIt.vbs"
+away from the other files.
+
+
+HOW TO MAKE FILES SMALLER
+-------------------------
+1. Press "Choose files" or "Choose a folder" and pick what you want to shrink.
+
+2. Look at the list. SqueezeIt shows each file's size and about how small it
+   will get. Move the "Smaller file <- -> Better quality" slider if you want.
+
+3. Press the big "Make files smaller" button.
+
+4. When it says "Done!", click "Save all…" (or "Save" beside one file) and
+   choose where to keep the new copies. Nothing is saved until you do.
+   The original files are never changed, and no folder is created beside them.
+
+
+GOOD TO KNOW
+------------
+* Nothing is uploaded. There is no account and no internet connection needed.
+
+* PDFs are shown as "Not supported in this version." SqueezeIt only works on
+  videos and pictures right now.
+
+* If your antivirus removes or blocks a file, restore it and add the whole
+  SqueezeIt folder as an exception, then start SqueezeIt again.
+
+* To stop early, press "Stop". Any unfinished copy is removed.
+
+* Need a copy to fit a limit (for example, 25 MB)? Open "More options" and
+  type a maximum size per file. SqueezeIt makes each file no bigger than that,
+  using the best quality that fits. Files already below the limit are skipped.
+  Very small pictures are turned into JPEG (or WebP if you chose that option)
+  so they can actually reach the limit. Leave the box empty for no limit.
+
+* To remove SqueezeIt, just delete the SqueezeIt folder and the Desktop icon.
+  There is nothing else to uninstall.

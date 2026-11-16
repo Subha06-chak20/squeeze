@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SqueezeIt — make big files small</title>
+  <meta name="description" content="SqueezeIt makes videos and pictures smaller, entirely on your own computer. No uploads, no account, no internet needed.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"></div>
+
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" role="presentation">
+            <path d="M9 6h14l-5 9h6L11 27l3-10H8z" fill="currentColor"></path>
+          </svg>
+        </span>
+        <span class="brand-text">
+          <span class="brand-name">SqueezeIt</span>
+          <span class="brand-tag">Make big files small.</span>
+        </span>
+      </div>
+      <div class="top-actions">
+        <span class="offline-pill"><span class="offline-dot" aria-hidden="true"></span>100% offline</span>
+        <button id="theme-toggle" class="icon-button" type="button" aria-label="Change theme. Currently automatic." title="Theme: automatic">
+          <svg class="theme-sun" viewBox="0 0 24 24" role="presentation" aria-hidden="true">
+            <circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"></circle>
+            <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+          </svg>
+          <svg class="theme-moon" viewBox="0 0 24 24" role="presentation" aria-hidden="true">
+            <path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.3 8.3 0 1 0 10.2 10.2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path>
+          </svg>
+          <span id="theme-label" class="sr-only">Theme: automatic</span>
+        </button>
+      </div>
+    </header>
+
+    <div id="notice" class="notice" hidden role="status" aria-live="polite">
+      <span class="notice-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"></circle><path d="M12 7.6v5.3M12 16.5v.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
+      </span>
+      <span id="notice-text"></span>
+      <button id="notice-close" class="notice-close" type="button" aria-label="Dismiss message">×</button>
+    </div>
+
+    <!-- Welcome, shown only on the first launch -->
+    <section id="welcome" class="card welcome" hidden aria-labelledby="welcome-title">
+      <div class="welcome-art" aria-hidden="true">
+        <span class="welcome-ring"></span>
+        <span class="welcome-arrows">
+          <svg viewBox="0 0 48 48"><path d="M24 8v24M14 22l10 10 10-10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9 40h30" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path></svg>
+        </span>
+      </div>
+      <p class="eyebrow">A friendlier way to save space</p>
+      <h2 id="welcome-title">Welcome to SqueezeIt</h2>
+      <p class="lede">Shrink videos and pictures without uploading anything. Your files stay right here on this computer.</p>
+      <ol class="steps">
+        <li>
+          <span class="step-num">1</span>
+          <span class="step-copy"><strong>Choose files</strong><small>Pick videos, pictures, or a whole folder.</small></span>
+        </li>
+        <li>
+          <span class="step-num">2</span>
+          <span class="step-copy"><strong>Pick your quality</strong><small>Smaller files, better looks, or a bit of both.</small></span>
+        </li>
+        <li>
+          <span class="step-num">3</span>
+          <span class="step-copy"><strong>Press the big button</strong><small>Review the result, then save only the copies you want.</small></span>
+        </li>
+      </ol>
+      <button id="welcome-close" class="btn primary big wide" type="button">Got it</button>
+      <p class="fineprint">No account. No internet. Your originals are never changed.</p>
+    </section>
+
+    <!-- Home -->
+    <section id="home" class="card home" hidden aria-labelledby="home-title">
+      <div class="hero">
+        <p class="eyebrow">Private by design</p>
+        <h2 id="home-title">What would you like to make smaller?</h2>
+        <p class="lede">Videos and pictures. SqueezeIt checks every file first, then shows you exactly how much space you will save.</p>
+      </div>
+      <div class="choose-grid">
+        <button id="choose-files" class="choose-card" type="button">
+          <span class="choose-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5h3l2 2h6A2.5 2.5 0 0 1 20 9.5v7A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path><path d="M9 13.5h6M12 10.5v6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path></svg>
+          </span>
+          <span class="choose-body">
+            <strong>Choose files</strong>
+            <small>One or many videos and pictures</small>
+          </span>
+          <span class="choose-arrow" aria-hidden="true">→</span>
+        </button>
+        <button id="choose-folder" class="choose-card" type="button">
+          <span class="choose-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M3.5 7.8A2.3 2.3 0 0 1 5.8 5.5h3.4l1.9 2h7.1a2.3 2.3 0 0 1 2.3 2.3v6.4a2.3 2.3 0 0 1-2.3 2.3H5.8a2.3 2.3 0 0 1-2.3-2.3z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path><path d="M3.8 9.5h16.4" fill="none" stroke="currentColor" stroke-width="1.7"></path></svg>
+          </span>
+          <span class="choose-body">
+            <strong>Choose a folder</strong>
+            <small>Everything inside is checked for you</small>
+          </span>
+          <span class="choose-arrow" aria-hidden="true">→</span>
+        </button>
+      </div>
+      <p id="home-status" class="scan-line" hidden role="status" aria-live="polite">
+        <span class="spinner" aria-hidden="true"></span>
+        <span id="home-status-text">Checking your files…</span>
+      </p>
+      <div class="feature-row">
+        <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.8 19 6.6v5.2c0 4-2.9 7.2-7 8.4-4.1-1.2-7-4.4-7-8.4V6.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"></path><path d="m8.8 12 2.1 2.1 4.3-4.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>No uploads</span>
+        <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7v10M7 12h10" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path><circle cx="12" cy="12" r="8.4" fill="none" stroke="currentColor" stroke-width="1.6"></circle></svg>Originals untouched</span>
+        <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5a7 7 0 0 1 12-4.9M19 11.5a7 7 0 0 1-12 4.9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path><path d="M17.6 3.8v4h-4M6.4 20.2v-4h4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path></svg>Works offline</span>
+      </div>
+    </section>
+
+    <!-- Ready list -->
+    <section id="ready" class="card ready" hidden aria-labelledby="ready-title">
+      <div class="section-head">
+        <div>
+          <h2 id="ready-title">Your files</h2>
+          <p id="ready-sub" class="quiet">Review the list, then press the big button.</p>
+        </div>
+        <div class="head-actions">
+          <button id="add-more" class="btn ghost small" type="button">+ Add files</button>
+          <button id="clear-list" class="btn ghost small subtle-danger" type="button">Clear</button>
+        </div>
+      </div>
+
+      <div class="totals" aria-label="Summary of your files">
+        <div class="stat">
+          <span class="stat-label">Files</span>
+          <strong id="total-files" class="stat-value">0</strong>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Original size</span>
+          <strong id="total-before" class="stat-value">0 B</strong>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Estimated</span>
+          <strong id="total-after" class="stat-value">0 B</strong>
+        </div>
+        <div class="stat accent">
+          <span class="stat-label">You save</span>
+          <strong id="savings-badge" class="stat-value">0%</strong>
+        </div>
+      </div>
+
+      <ul id="file-list" class="file-list" aria-label="Files to make smaller"></ul>
+      <p id="empty-list" class="empty-state" hidden>No files in the list yet.</p>
+
+      <div class="quality-card">
+        <div class="quality-head">
+          <div>
+            <label for="quality">Quality</label>
+            <p class="quiet">Smaller file ←→ better quality</p>
+          </div>
+          <output id="quality-value" class="quality-value" for="quality">Balanced</output>
+        </div>
+        <input id="quality" type="range" min="0" max="100" value="50" step="1" aria-describedby="quality-help">
+        <div class="scale" aria-hidden="true"><span>Smallest</span><span>Balanced</span><span>Best looking</span></div>
+        <p id="quality-help" class="quiet">A bit of both. We will check how the new files look.</p>
+      </div>
+
+      <details id="more-options" class="options">
+        <summary>
+          <span>More options</span>
+          <span class="summary-hint">Save folder, size limit, shape, WebP</span>
+        </summary>
+        <div class="options-grid">
+          <div class="field span-2">
+            <label for="opt-output">Suggested save folder</label>
+            <div class="input-row">
+              <input id="opt-output" type="text" autocomplete="off" placeholder="Leave empty to choose a folder each time you save">
+              <button id="opt-output-pick" class="btn small" type="button">Choose…</button>
+            </div>
+          </div>
+          <div class="field">
+            <label for="opt-aspect">Shape</label>
+            <select id="opt-aspect">
+              <option value="original">Keep original</option>
+              <option value="square">Square</option>
+              <option value="widescreen">Widescreen</option>
+              <option value="vertical">Vertical</option>
+            </select>
+          </div>
+          <div class="field span-2">
+            <label for="opt-max-size">Maximum size per file</label>
+            <div class="input-row">
+              <input id="opt-max-size" type="number" min="1" step="any" inputmode="decimal" placeholder="No limit">
+              <select id="opt-max-unit" aria-label="Size unit">
+                <option value="KB">KB</option>
+                <option value="MB" selected>MB</option>
+                <option value="GB">GB</option>
+              </select>
+            </div>
+            <small class="hint-text">Leave empty for no limit. Each file will be made no bigger than this, with the best quality that fits.</small>
+          </div>
+          <div class="field">
+            <label for="opt-width">Largest width</label>
+            <input id="opt-width" type="number" min="64" step="2" inputmode="numeric" placeholder="Original width">
+          </div>
+          <div class="field">
+            <label for="opt-jobs">Files at once</label>
+            <select id="opt-jobs">
+              <option value="1">1 — gentlest</option>
+              <option value="2">2</option>
+              <option value="4">4</option>
+            </select>
+          </div>
+          <div class="field checkbox-field">
+            <label class="switch" for="opt-webp">
+              <input id="opt-webp" type="checkbox">
+              <span class="switch-track" aria-hidden="true"></span>
+              <span class="switch-text">Turn pictures into WebP</span>
+            </label>
+          </div>
+        </div>
+      </details>
+
+      <button id="start" class="btn primary big wide" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M5 19.5h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
+        <span>Make files smaller</span>
+      </button>
+      <p class="fineprint center">Your originals are never changed. Nothing is saved until you click Save.</p>
+    </section>
+
+    <!-- Working -->
+    <section id="working" class="card working" hidden aria-labelledby="working-title">
+      <div class="working-head">
+        <span class="working-orb" aria-hidden="true"><span></span></span>
+        <div class="working-copy">
+          <h2 id="working-title">Working on your files…</h2>
+          <p id="working-count" class="big-status" role="status" aria-live="polite">Getting ready…</p>
+        </div>
+        <span id="working-percent" class="percent">0%</span>
+      </div>
+      <div class="progress-track" role="progressbar" aria-label="Progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressbar">
+        <div id="progress-fill" class="progress-fill"></div>
+      </div>
+      <div class="working-meta">
+        <span id="working-file" class="quiet"></span>
+        <span id="working-time" class="quiet"></span>
+      </div>
+      <button id="stop" class="btn danger wide" type="button">Stop</button>
+      <p class="fineprint center">Stopping removes any unfinished copy. Your originals stay safe.</p>
+    </section>
+
+    <!-- Finished -->
+    <section id="finished" class="card finished" hidden aria-labelledby="finished-title">
+      <div class="finish-hero">
+        <span class="success-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="m6.5 12.5 3.5 3.5 7.5-8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </span>
+        <h2 id="finished-title">Done!</h2>
+        <p id="summary" class="summary" role="status" aria-live="polite"></p>
+      </div>
+      <div class="finish-stats">
+        <div class="stat">
+          <span class="stat-label">Files smaller</span>
+          <strong id="done-count" class="stat-value">0</strong>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Space saved</span>
+          <strong id="saved-amount" class="stat-value">0 B</strong>
+        </div>
+        <div class="stat accent">
+          <span class="stat-label">Reduction</span>
+          <strong id="saved-percent" class="stat-value">0%</strong>
+        </div>
+      </div>
+      <div class="finish-buttons">
+        <button id="save-copy" class="btn primary big" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v9M8 9.5 12 13.5l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path><path d="M5 15v3.5h14V15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span>Save all…</span>
+        </button>
+        <button id="open-folder" class="btn big" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 7.8A2.3 2.3 0 0 1 5.8 5.5h3.4l1.9 2h7.1a2.3 2.3 0 0 1 2.3 2.3v6.4a2.3 2.3 0 0 1-2.3 2.3H5.8a2.3 2.3 0 0 1-2.3-2.3z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path><path d="M3.8 9.5h16.4" fill="none" stroke="currentColor" stroke-width="1.7"></path></svg>
+          <span>Open temporary folder</span>
+        </button>
+        <button id="make-more" class="btn big" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 1 2.4 5.7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path><path d="M4 19v-5h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span>Make more</span>
+        </button>
+      </div>
+      <p id="save-state" class="save-state" hidden></p>
+      <p id="output-path" class="output-path" hidden></p>
+
+      <details id="done-details" class="results">
+        <summary>See what changed <span id="done-details-count" class="summary-hint"></span></summary>
+        <ul id="done-list"></ul>
+      </details>
+
+      <div id="failures" class="failures" hidden>
+        <h3>Files that were skipped or need a look</h3>
+        <ul id="failure-list"></ul>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span id="hardware-note">Standard encoding</span>
+      <span class="footer-dot" aria-hidden="true">·</span>
+      <span>Version <span id="version">1.1.0</span></span>
+      <span class="footer-dot" aria-hidden="true">·</span>
+      <span>No account. No internet. Originals kept.</span>
+    </footer>
+  </main>
+
+  <noscript>
+    <p class="noscript">SqueezeIt needs JavaScript, which is built into your browser. Please enable it and reload this page.</p>
+  </noscript>
+
+  <script src="/app.js"></script>
+</body>
+</html>
