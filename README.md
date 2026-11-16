@@ -47,7 +47,7 @@ You can clone this repository onto any Windows machine and immediately run, deve
 ### 2. Clone the Repository
 
 ```powershell
-git clone https://github.com/<owner>/squeezeit.git
+git clone https://github.com/Subha06-chak20/squeezeit.git
 cd squeezeit
 ```
 
